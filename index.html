@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ==========================================================================
+     CARD STOP — by Abbott Trading Card Group
+     Single-file, deploy-ready landing page (inline CSS, one tiny inline script).
+     No build tools, no external JS. Images live in /assets.
+
+     HOW THIS FILE IS ORGANIZED (search for these markers to jump around):
+       [CSS] design tokens / palette ....... :root variables
+       [CSS] components & layout ............ buttons, header, hero, sections
+       [HTML] HEADER ........................ logo + nav
+       [HTML] HERO .......................... machine render + headline
+       [HTML] ELEMENTAL BAR ................. holographic accent strip
+       [HTML] WHAT IT IS .................... brand intro + feature cards
+       [HTML] THE MACHINE ................... VTM Slim Tower 2.0 specs
+       [HTML] WHAT'S INSIDE ................. two configurations
+       [HTML] HOW IT WORKS .................. consumer buy flow
+       [HTML] HOST A CARD STOP .............. venue-owner pitch (revenue share)
+       [HTML] AUTHENTICITY .................. trust / disclaimers
+       [HTML] CONTACT / FOOTER .............. email, phone, address
+
+     EDITING TIPS FOR THE USER:
+       • Prices shown are PLACEHOLDERS — search "PRICE PLACEHOLDER" and set finals.
+       • The header logo currently crops the brand sheet. Swap in a real
+         transparent logo when you have one — search "LOGO PLACEHOLDER".
+       • All brand colors are CSS variables in :root so you can retune once.
+========================================================================== -->
+
+<title>CARD STOP — Authentic Trading Cards, Right Where the Fun Is | Abbott Trading Card Group</title>
+<meta name="description" content="CARD STOP by Abbott Trading Card Group — modern, fully managed trading-card vending machines placed in high-traffic venues across southern Utah. 100% authentic product at fair, posted prices. Host a Card Stop at your venue and earn a share of every sale.">
+<meta name="theme-color" content="#1B2A4A">
+
+<!-- Open Graph / social preview (update URL + image when live) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="CARD STOP — Pull Something Real">
+<meta property="og:description" content="Authentic trading-card vending machines by Abbott Trading Card Group. 100% real product, fair posted prices. Host one at your venue.">
+<meta property="og:image" content="assets/card-stop-machine.png">
+<meta property="og:url" content="https://abbotttcg.com/">
+
+<!-- Inline SVG favicon: a gold "gate/portal" mark echoing the CARD STOP icon.
+     Replace with a real .ico/.png favicon export when available. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231B2A4A'/%3E%3Cpath d='M24 18h16v28h-8V30h-8z' fill='none' stroke='%23F2B544' stroke-width='5' stroke-linejoin='round'/%3E%3Cpath d='M32 8l4 6-4 6-4-6z' fill='%232BB7B3'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================================
+   [CSS] DESIGN TOKENS / PALETTE
+   Official CARD STOP brand colors (from the brand sheet) as CSS variables.
+   Change a value here and it updates everywhere.
+   ========================================================================= */
+:root{
+  /* --- Core brand --- */
+  --indigo:#1B2A4A;          /* Deep Indigo  — primary dark */
+  --gold:#F2B544;            /* Metallic Gold — primary accent */
+  --teal:#2BB7B3;            /* Teal          — secondary accent */
+
+  /* --- Elemental accents (the four mascots) --- */
+  --electric-yellow:#FFD21A; /* Electric  (lightning) */
+  --sapphire-blue:#2A6BE0;   /* Water     (sapphire)  */
+  --emerald-green:#1FA855;   /* Grass     (emerald)   */
+  --flame-orange:#F26A21;    /* Fire      (flame)     */
+
+  /* --- Support neutrals --- */
+  --night:#111C30;           /* darker indigo for deep sections */
+  --indigo-2:#22345A;        /* raised panel on dark */
+  --ember:#E0972A;           /* deeper gold for small text on light */
+  --bone:#F7F5EF;            /* warm off-white page bg */
+  --ink:#1B2233;             /* body text on light */
+  --muted:#5B6172;           /* secondary text on light */
+  --line:#E7E2D4;            /* hairline on light */
+  --line-dk:rgba(247,244,236,.14); /* hairline on dark */
+
+  /* --- Signature gradients (holographic / metallic / foil) --- */
+  --holo:linear-gradient(100deg,var(--electric-yellow),var(--emerald-green) 28%,var(--teal) 48%,var(--sapphire-blue) 72%,var(--flame-orange));
+  --chrome:linear-gradient(180deg,#ffffff 0%,#d7dcea 42%,#939cb4 54%,#ffffff 72%,#e7ebf5 100%);
+  --goldgrad:linear-gradient(180deg,#ffe9a8 0%,#F2B544 46%,#b9791e 78%,#ffcf6b 100%);
+}
+
+/* =========================================================================
+   [CSS] BASE / RESET
+   ========================================================================= */
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
+  color:var(--ink); background:var(--bone); line-height:1.6;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+h1,h2,h3,h4,.disp{ font-family:'Montserrat','Arial Black',Arial,sans-serif; font-weight:800; line-height:1.12; letter-spacing:-.01em; }
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+.wrap{ width:100%; max-width:1120px; margin:0 auto; padding:0 22px; }
+.eyebrow{ font-family:'Montserrat',Arial,sans-serif; font-weight:800; letter-spacing:3px; font-size:12px; text-transform:uppercase; }
+
+/* --- Metallic CARD STOP wordmark (chrome "CARD" + gold "STOP") --- */
+.wm{ font-family:'Montserrat',Arial,sans-serif; font-weight:900; letter-spacing:.5px; display:inline; }
+.wm .c-card{ background:var(--chrome); -webkit-background-clip:text; background-clip:text; color:#e9edf5; -webkit-text-fill-color:transparent; }
+.wm .c-stop{ background:var(--goldgrad); -webkit-background-clip:text; background-clip:text; color:var(--gold); -webkit-text-fill-color:transparent; }
+/* Multi-color elemental tagline "Pull Something Real." */
+.tagline .p{ color:var(--gold); } .tagline .s{ color:var(--sapphire-blue); } .tagline .r{ color:var(--emerald-green); }
+.tagline{ font-family:'Montserrat',Arial,sans-serif; font-weight:800; letter-spacing:.4px; }
+
+/* =========================================================================
+   [CSS] BUTTONS
+   ========================================================================= */
+.btn{ display:inline-block; font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:15px;
+  padding:13px 24px; border-radius:999px; cursor:pointer; border:2px solid transparent; white-space:nowrap;
+  transition:transform .08s ease, box-shadow .2s ease, background .2s ease; }
+.btn:hover{ transform:translateY(-2px); }
+.btn-gold{ background:var(--goldgrad); color:#3a2a08; box-shadow:0 8px 22px rgba(242,181,68,.38); }
+.btn-teal{ background:var(--teal); color:#06201f; box-shadow:0 8px 22px rgba(43,183,179,.30); }
+.btn-ghost{ background:transparent; color:var(--bone); border-color:rgba(247,244,236,.5); }
+.btn-ghost:hover{ border-color:var(--gold); color:var(--gold); }
+.btn-dark{ background:var(--indigo); color:var(--bone); }
+
+/* =========================================================================
+   [CSS] HEADER
+   ========================================================================= */
+header{ position:sticky; top:0; z-index:60; background:rgba(20,30,52,.94); backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line-dk); }
+.nav{ display:flex; align-items:center; gap:16px; height:70px; }
+.brand{ display:flex; align-items:center; gap:12px; }
+
+/* LOGO PLACEHOLDER --------------------------------------------------------
+   The header logo below crops the *primary brand sheet* down to the
+   horizontal CARD STOP lockup (there is no isolated logo file yet).
+   TO REPLACE: export a transparent-background logo (e.g. assets/card-stop-logo.png)
+   then (1) set it as the <img src> in the [HTML] HEADER, and
+           (2) delete the .logo-crop offsets below and use  .logo-crop img{position:static;width:auto;height:44px}
+   ------------------------------------------------------------------------- */
+.logo-crop{ position:relative; width:78px; height:50px; overflow:hidden; border-radius:8px;
+  border:1px solid rgba(242,181,68,.28); flex:0 0 auto; background:#0f1b2f; }
+.logo-crop img{ position:absolute; left:-206px; top:-94px; width:358px; height:auto; max-width:none; }
+.brand .bname{ display:flex; flex-direction:column; line-height:1.1; }
+.brand .bname b{ font-family:'Montserrat',Arial,sans-serif; font-weight:800; color:var(--bone); font-size:13.5px; letter-spacing:.3px; }
+.brand .bname span{ font-size:9px; letter-spacing:2px; font-weight:700; text-transform:uppercase; }
+.nav .links{ margin-left:auto; display:flex; align-items:center; gap:26px; }
+.nav .links a.navlink{ color:#cfd6e6; font-weight:600; font-size:14.5px; }
+.nav .links a.navlink:hover{ color:var(--gold); }
+.nav .links .btn{ padding:10px 18px; font-size:14px; }
+@media(max-width:820px){ .nav .links a.navlink{ display:none; } .brand .bname{ display:none; } }
+
+/* =========================================================================
+   [CSS] HERO
+   ========================================================================= */
+.hero{ position:relative; overflow:hidden; color:var(--bone);
+  background:
+    radial-gradient(1200px 520px at 82% -6%, rgba(43,183,179,.20), transparent 60%),
+    radial-gradient(900px 460px at 8% 4%, rgba(242,181,68,.16), transparent 62%),
+    linear-gradient(180deg,var(--indigo) 0%, var(--night) 100%); }
+.hero-inner{ display:grid; grid-template-columns:1.08fr .92fr; gap:34px; align-items:center; padding:66px 0 58px; }
+@media(max-width:900px){ .hero-inner{ grid-template-columns:1fr; text-align:center; padding:48px 0 40px; } }
+.hero h1{ font-size:clamp(36px,6.4vw,66px); color:var(--bone); }
+.hero h1 .wm{ display:inline-block; }
+.hero .kicker{ color:var(--gold); margin-bottom:16px; }
+.hero p.sub{ color:#cdd4e4; font-size:clamp(15px,2.1vw,19px); max-width:560px; margin:18px 0 26px; }
+@media(max-width:900px){ .hero p.sub{ margin-left:auto; margin-right:auto; } }
+.hero .cta{ display:flex; gap:14px; flex-wrap:wrap; }
+@media(max-width:900px){ .hero .cta{ justify-content:center; } }
+.hero .chips{ display:flex; flex-wrap:wrap; gap:10px 18px; margin-top:26px; font-size:13px; color:#b9c2d6; }
+@media(max-width:900px){ .hero .chips{ justify-content:center; } }
+.hero .chips b{ color:var(--teal); }
+/* Machine render: transparent cutout floats on the dark hero with a soft glow. */
+.machine-wrap{ position:relative; display:flex; justify-content:center; }
+.machine-wrap::before{ content:""; position:absolute; width:78%; height:66%; top:14%; left:11%;
+  background:radial-gradient(closest-side, rgba(43,183,179,.34), rgba(242,181,68,.14) 55%, transparent 72%);
+  filter:blur(8px); z-index:0; }
+.machine-wrap img{ position:relative; z-index:1; max-height:540px; width:auto;
+  filter:drop-shadow(0 26px 40px rgba(0,0,0,.5)); }
+@media(max-width:900px){ .machine-wrap img{ max-height:400px; margin:8px auto 0; } }
+
+/* =========================================================================
+   [CSS] ELEMENTAL ACCENT BAR (holographic strip)
+   ========================================================================= */
+.elembar{ height:6px; background:var(--holo); }
+.elemnote{ background:var(--night); color:#c7cfe0; text-align:center; padding:12px 16px; font-size:13.5px; letter-spacing:.3px; }
+.elemnote b{ color:var(--gold); }
+
+/* =========================================================================
+   [CSS] SECTIONS (shared)
+   ========================================================================= */
+section{ padding:66px 0; }
+.sec-head{ text-align:center; max-width:720px; margin:0 auto 40px; }
+.sec-head .eyebrow{ color:var(--ember); }
+.sec-head h2{ font-size:clamp(27px,4vw,40px); color:var(--indigo); margin:10px 0 12px; }
+.sec-head p{ color:var(--muted); font-size:16.5px; }
+
+.grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px; }
+.card{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:24px;
+  box-shadow:0 1px 0 rgba(27,42,74,.03); }
+.card .ic{ width:48px; height:48px; border-radius:13px; background:var(--indigo); color:var(--gold);
+  display:flex; align-items:center; justify-content:center; font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:22px; margin-bottom:14px; }
+.card h3{ color:var(--indigo); font-size:18px; margin-bottom:7px; }
+.card p{ color:var(--muted); font-size:14.5px; }
+.alt{ background:#fff; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+
+/* =========================================================================
+   [CSS] THE MACHINE — spec chips
+   ========================================================================= */
+.specs{ display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:16px; }
+.spec{ background:var(--indigo); color:var(--bone); border:1px solid var(--indigo-2); border-radius:14px; padding:20px 18px; }
+.spec .big{ font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:26px; color:var(--gold); line-height:1; }
+.spec .lbl{ font-size:13px; color:#c7cfe0; margin-top:8px; }
+.machine-lead{ display:grid; grid-template-columns:.8fr 1.2fr; gap:34px; align-items:center; margin-bottom:36px; }
+@media(max-width:820px){ .machine-lead{ grid-template-columns:1fr; } }
+.machine-lead .shot{ background:linear-gradient(180deg,#eef4f4,#e6efee); border:1px solid var(--line); border-radius:18px; padding:14px; text-align:center; }
+.machine-lead .shot img{ margin:0 auto; max-height:360px; width:auto; }
+.machine-lead .shot small{ display:block; color:var(--muted); font-size:12px; margin-top:8px; }
+
+/* =========================================================================
+   [CSS] WHAT'S INSIDE — framed section (uses card-stop-frame.png as ambient bg)
+   ========================================================================= */
+.framed{ position:relative; background:var(--bone); overflow:hidden; }
+.framed::before{ content:""; position:absolute; inset:0; z-index:0;
+  background:url('assets/card-stop-frame.png') center/cover no-repeat; opacity:.12; }
+.framed::after{ content:""; position:absolute; inset:0; z-index:0;
+  background:radial-gradient(closest-side, rgba(247,245,239,.86), rgba(247,245,239,.55)); }
+.framed .wrap{ position:relative; z-index:1; }
+.configs{ display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+@media(max-width:760px){ .configs{ grid-template-columns:1fr; } }
+.config{ background:#fff; border:1.5px solid var(--line); border-radius:18px; padding:26px; }
+.config .tag{ display:inline-block; font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:11px; letter-spacing:.6px;
+  padding:5px 11px; border-radius:7px; margin-bottom:13px; color:#06201f; }
+.config.packs .tag{ background:var(--electric-yellow); }
+.config.singles .tag{ background:var(--teal); }
+.config h3{ font-size:22px; color:var(--indigo); margin-bottom:9px; }
+.config p{ color:var(--muted); font-size:15px; }
+.config .price{ margin-top:14px; font-family:'Montserrat',Arial,sans-serif; font-weight:800; color:var(--ember); font-size:14px; }
+
+/* =========================================================================
+   [CSS] HOW IT WORKS — numbered steps
+   ========================================================================= */
+.steps{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+@media(max-width:760px){ .steps{ grid-template-columns:1fr 1fr; } }
+@media(max-width:440px){ .steps{ grid-template-columns:1fr; } }
+.step{ text-align:center; padding:8px; }
+.step .n{ width:46px; height:46px; margin:0 auto 12px; border-radius:50%; background:var(--holo); color:#0e1a2e;
+  display:flex; align-items:center; justify-content:center; font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:20px;
+  box-shadow:0 6px 16px rgba(27,42,74,.18); }
+.step h4{ color:var(--indigo); font-size:16px; margin-bottom:4px; }
+.step p{ color:var(--muted); font-size:14px; }
+
+/* =========================================================================
+   [CSS] HOST A CARD STOP — venue-owner pitch
+   ========================================================================= */
+.host{ background:linear-gradient(180deg,var(--night),var(--indigo)); color:var(--bone); }
+.host .sec-head h2{ color:var(--bone); } .host .sec-head p{ color:#cdd4e4; }
+.host .sec-head .eyebrow{ color:var(--gold); }
+.hostcards{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-bottom:36px; }
+@media(max-width:760px){ .hostcards{ grid-template-columns:1fr; } }
+.hcard{ background:var(--indigo); border:1px solid var(--line-dk); border-radius:16px; padding:24px; }
+.hcard .ic{ width:46px; height:46px; border-radius:12px; background:var(--gold); color:var(--indigo);
+  display:flex; align-items:center; justify-content:center; font-weight:800; font-size:22px; margin-bottom:13px; font-family:'Montserrat',Arial,sans-serif; }
+.hcard h3{ color:var(--bone); font-size:18px; margin-bottom:7px; }
+.hcard p{ color:#c7cfe0; font-size:14.5px; }
+.hostgrid{ display:grid; grid-template-columns:1fr 1fr; gap:30px; align-items:start; }
+@media(max-width:860px){ .hostgrid{ grid-template-columns:1fr; } }
+.host h3.blk{ color:var(--gold); font-size:14px; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:14px; }
+ul.checks{ list-style:none; }
+ul.checks li{ position:relative; padding-left:28px; margin:12px 0; font-size:15px; color:#e7ebf4; }
+ul.checks li::before{ content:"✓"; position:absolute; left:0; top:0; color:var(--teal); font-weight:800; font-size:16px; }
+.revshare{ background:var(--indigo); border:1px solid var(--gold); border-radius:18px; padding:26px; }
+.revshare .pct{ font-family:'Montserrat',Arial,sans-serif; font-weight:900; color:var(--gold); font-size:66px; line-height:.9; }
+.revshare .pct small{ display:block; font-size:12px; color:var(--bone); letter-spacing:2px; font-weight:700; margin-top:6px; }
+.revshare p{ color:#dfe4f0; font-size:14.5px; margin-top:14px; }
+.revshare .fine{ color:#9aa3b8; font-size:12px; margin-top:14px; }
+.hoststeps{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:6px; }
+@media(max-width:760px){ .hoststeps{ grid-template-columns:1fr 1fr; } }
+.onepager{ display:flex; align-items:center; gap:16px; margin-top:30px; background:var(--indigo); border:1px solid var(--line-dk);
+  border-radius:16px; padding:16px 18px; flex-wrap:wrap; }
+.onepager img{ width:66px; height:auto; border-radius:8px; border:1px solid var(--line-dk); }
+.onepager .txt{ flex:1; min-width:200px; } .onepager .txt b{ color:var(--bone); } .onepager .txt p{ color:#c7cfe0; font-size:13.5px; margin-top:2px; }
+
+/* =========================================================================
+   [CSS] AUTHENTICITY
+   ========================================================================= */
+.seal{ width:108px; height:108px; border-radius:50%; border:3px solid var(--gold);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; margin:0 auto 20px; background:#fff; }
+.seal b{ font-family:'Montserrat',Arial,sans-serif; color:var(--ember); font-size:26px; }
+.seal span{ font-size:10px; letter-spacing:1.5px; color:var(--muted); }
+
+/* =========================================================================
+   [CSS] CONTACT / FOOTER
+   ========================================================================= */
+footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
+.foot-cta{ text-align:center; margin-bottom:34px; }
+.foot-cta h2{ font-size:clamp(24px,4vw,36px); color:var(--bone); margin-bottom:10px; }
+.foot-cta p{ color:#cdd4e4; margin-bottom:22px; }
+.contactline{ display:flex; flex-wrap:wrap; gap:10px 26px; justify-content:center; align-items:center; margin-bottom:18px; }
+.contactline a{ font-family:'Montserrat',Arial,sans-serif; font-weight:800; color:var(--gold); font-size:18px; }
+.contactline span{ color:#8f9ab2; }
+.foot-bottom{ border-top:1px solid var(--line-dk); padding-top:22px; display:flex; flex-wrap:wrap;
+  gap:12px; justify-content:space-between; align-items:flex-start; font-size:12.5px; color:#aeb6c8; }
+.foot-bottom .disc{ max-width:660px; }
+.foot-bottom b{ color:var(--ember); }
+.badges{ display:flex; gap:10px 16px; flex-wrap:wrap; margin-top:6px; font-weight:700; color:#c7cfe0; font-size:12.5px; }
+.badges span::before{ content:"★ "; color:var(--gold); }
+</style>
+</head>
+<body id="top">
+
+<!-- ======================= [HTML] HEADER ======================= -->
+<header>
+  <div class="wrap">
+    <nav class="nav">
+      <a class="brand" href="#top" aria-label="CARD STOP by Abbott Trading Card Group — home">
+        <!-- LOGO PLACEHOLDER: cropped from assets/card-stop-logo-system.png (see .logo-crop CSS notes). -->
+        <span class="logo-crop">
+          <img src="assets/card-stop-logo-system.png" alt="CARD STOP by Abbott Trading Card Group logo">
+        </span>
+        <span class="bname">
+          <b>CARD STOP</b>
+          <span class="tagline"><span class="p">by</span> Abbott Trading Card Group</span>
+        </span>
+      </a>
+      <div class="links">
+        <a class="navlink" href="#machine">The machine</a>
+        <a class="navlink" href="#inside">What's inside</a>
+        <a class="navlink" href="#how">How it works</a>
+        <a class="navlink" href="#host">Host a Card Stop</a>
+        <a class="btn btn-gold" href="#host">Host a Card Stop</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ======================= [HTML] HERO ======================= -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow kicker">Authentic trading-card vending · Southern Utah</p>
+        <h1>Real cards.<br>Real fun.<br>
+          <span class="tagline" style="font-size:.62em; display:inline-block; margin-top:.15em;">
+            <span class="p">Pull</span> <span class="s">something</span> <span class="r">real.</span>
+          </span>
+        </h1>
+        <p class="sub">Abbott Trading Card Group builds, owns, stocks, and services
+          <span class="wm"><span class="c-card">CARD</span> <span class="c-stop">STOP</span></span> —
+          a modern, fully managed trading-card vending machine — and places it where people already gather.
+          100% authentic product at fair, posted prices.</p>
+        <div class="cta">
+          <a class="btn btn-gold" href="#host">Host a Card Stop at your venue</a>
+          <a class="btn btn-ghost" href="#how">See how it works</a>
+        </div>
+        <div class="chips">
+          <span><b>100%</b> authentic product</span>
+          <span><b>Fair</b> posted prices</span>
+          <span><b>Tap</b> &amp; card payment</span>
+          <span><b>Locally owned</b> · veteran operated</span>
+        </div>
+      </div>
+      <!-- Machine hero: transparent cutout of the VTM Slim Tower 2.0 render.
+           Swap for a real photo or a transparent product render when available. -->
+      <div class="machine-wrap">
+        <img src="assets/card-stop-machine-cutout.png" alt="CARD STOP trading-card vending machine — a wrapped free-standing tower with a large touchscreen">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= [HTML] ELEMENTAL ACCENT BAR ======================= -->
+<div class="elembar" aria-hidden="true"></div>
+<div class="elemnote">Five elements. Endless pulls. <b>Electric · Water · Grass · Fire</b> — and the crystal core.</div>
+
+<!-- ======================= [HTML] WHAT IT IS ======================= -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">What is Card Stop?</p>
+      <h2>A trading-card shop, in a machine</h2>
+      <p>Abbott Trading Card Group owns, stocks, and services every
+        <span class="wm"><span class="c-card">CARD</span> <span class="c-stop">STOP</span></span> —
+        bringing genuine, sealed trading cards within arm's reach at honest prices, with none of the mystery-box gimmicks.</p>
+    </div>
+    <div class="grid">
+      <div class="card"><div class="ic">✓</div><h3>100% authentic</h3><p>Only genuine product from legitimate channels. Sealed packs and cased singles — what you get is always real.</p></div>
+      <div class="card"><div class="ic">$</div><h3>Fair, posted prices</h3><p>Clear prices right on the 43″ screen. No mystery boxes, no markup games — just honest value.</p></div>
+      <div class="card"><div class="ic">⌁</div><h3>Tap &amp; go</h3><p>Fast, cashless checkout by tap or card on a bright touchscreen. Built for busy, family-friendly venues.</p></div>
+      <div class="card"><div class="ic">★</div><h3>Local &amp; veteran-operated</h3><p>A real local partner based in Hurricane / St. George, Utah — quick to respond and accountable.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= [HTML] THE MACHINE (VTM Slim Tower 2.0) ======================= -->
+<section class="alt" id="machine">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">The machine</p>
+      <h2>Meet the VTM Slim Tower 2.0</h2>
+      <p>A clean, free-standing tower with a big, bright touchscreen and a small footprint — designed to look premium in any venue and keep the line moving.</p>
+    </div>
+
+    <div class="machine-lead">
+      <div class="shot">
+        <!-- Full render (with its studio backdrop). Replace with an on-site photo when you have one. -->
+        <img src="assets/card-stop-machine.png" alt="CARD STOP VTM Slim Tower 2.0 vending machine, full view">
+        <small>CARD STOP wrap on the VTM Slim Tower 2.0 · illustrative render</small>
+      </div>
+      <div class="specs">
+        <div class="spec"><div class="big">Slim</div><div class="lbl">Free-standing tower — a compact ~2 ft × 2 ft footprint and a standard outlet.</div></div>
+        <div class="spec"><div class="big">43″</div><div class="lbl">Large HD touchscreen to browse products and check out.</div></div>
+        <div class="spec"><div class="big">Tap</div><div class="lbl">Cashless — contactless tap and card payment. Fast, reliable checkout.</div></div>
+        <div class="spec"><div class="big">456</div><div class="lbl">Pack capacity — deep inventory means fewer restocks and more uptime.</div></div>
+      </div>
+    </div>
+    <p class="sec-head" style="margin:0 auto; color:var(--muted); font-size:14px; max-width:760px;">
+      Full-color custom CARD STOP wrap with accent lighting — an eye-catching draw that still reads clean and retail-friendly.
+    </p>
+  </div>
+</section>
+
+<!-- ======================= [HTML] WHAT'S INSIDE (two configurations) ======================= -->
+<!-- Uses card-stop-frame.png as an ambient elemental "frame" behind the content. -->
+<section class="framed" id="inside">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">What's inside</p>
+      <h2>Two ways to pull</h2>
+      <p>Every Card Stop is stocked with genuine product in one of two configurations. Either way, you always get authentic cards at a fair, posted price.</p>
+    </div>
+    <div class="configs">
+      <div class="config packs">
+        <span class="tag">CONFIGURATION · SEALED BOOSTER PACKS</span>
+        <h3>Sealed booster packs</h3>
+        <p>Factory-sealed, 100% authentic booster packs — exactly as they leave the manufacturer. Browse the lineup on screen, tap to buy, and the machine dispenses your sealed pack. Real product, honest price, every time.</p>
+        <!-- PRICE PLACEHOLDER — confirm your final pack prices before launch. -->
+        <p class="price">Packs from $X.XX · set your final prices before launch</p>
+      </div>
+      <div class="config singles">
+        <span class="tag">CONFIGURATION · MYSTERY SINGLES</span>
+        <h3>Cased mystery singles</h3>
+        <p>On this machine, singles vend as <strong>cased mystery singles</strong> — each authentic single card sealed in a protective case. The exact card is a surprise until you open it, and every single is genuine and protected from the moment it drops.</p>
+        <!-- PRICE PLACEHOLDER — confirm your final single prices before launch. -->
+        <p class="price">Singles from $X.XX · set your final prices before launch</p>
+      </div>
+    </div>
+    <p class="sec-head" style="margin:26px auto 0; color:var(--muted); font-size:13.5px; max-width:760px;">
+      The machine selects which item is dispensed from the on-screen lineup — every purchase is genuine, authentic product at the single posted price.
+    </p>
+  </div>
+</section>
+
+<!-- ======================= [HTML] HOW IT WORKS (consumer) ======================= -->
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">How it works</p>
+      <h2>Pull something real in four taps</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h4>Browse the screen</h4><p>See the lineup and posted prices on the 43″ touchscreen.</p></div>
+      <div class="step"><div class="n">2</div><h4>Tap or pay by card</h4><p>Fast, cashless checkout — no app, no account.</p></div>
+      <div class="step"><div class="n">3</div><h4>The machine vends</h4><p>Your sealed pack or cased single drops to the tray.</p></div>
+      <div class="step"><div class="n">4</div><h4>Grab &amp; go</h4><p>Genuine, protected product in hand. Pull something real.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= [HTML] HOST A CARD STOP (venue owners) ======================= -->
+<section class="host" id="host">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">For venues</p>
+      <h2>Host a Card Stop at your venue</h2>
+      <p>A new revenue stream for your space — at zero cost to you. We own, stock, and service everything; you earn a share of every sale on floor space you already have.</p>
+    </div>
+
+    <!-- Three headline benefits (mirrors the host one-pager) -->
+    <div class="hostcards">
+      <div class="hcard"><div class="ic">$</div><h3>Earn passive revenue</h3><p>Collect a revenue share on every sale — from a small spot you already have. No inventory to buy, no cash to count.</p></div>
+      <div class="hcard"><div class="ic">◎</div><h3>More foot traffic &amp; dwell time</h3><p>A fun, eye-catching, all-ages draw that brings collectors and families in and keeps guests around longer.</p></div>
+      <div class="hcard"><div class="ic">✓</div><h3>Zero cost &amp; zero effort</h3><p>No purchase, no rent, no restocking, no maintenance. A small footprint and a clean, retail-friendly look.</p></div>
+    </div>
+
+    <div class="hostgrid">
+      <!-- Left: how it works for the host -->
+      <div>
+        <h3 class="blk">How hosting works</h3>
+        <div class="hoststeps">
+          <div class="step"><div class="n">1</div><h4>You provide the spot</h4><p>About 2 ft × 2 ft and a standard outlet.</p></div>
+          <div class="step"><div class="n">2</div><h4>We install &amp; stock</h4><p>Delivered, branded, and filled — at no cost to you.</p></div>
+          <div class="step"><div class="n">3</div><h4>We service it</h4><p>Restocked and maintained on a regular local route.</p></div>
+          <div class="step"><div class="n">4</div><h4>You get paid</h4><p>Your revenue share on a simple, agreed schedule.</p></div>
+        </div>
+
+        <h3 class="blk" style="margin-top:28px;">Why Abbott Trading Card Group</h3>
+        <ul class="checks">
+          <li><strong>100% authentic product</strong> — sealed booster packs and cased singles, every time.</li>
+          <li><strong>Tamper-evident &amp; sealed</strong> — packs factory-sealed; singles cased and protected.</li>
+          <li><strong>Fair, fixed, posted prices</strong> — no mystery, no markup games.</li>
+          <li><strong>Accepts tap &amp; card</strong> — modern, reliable, low-friction checkout.</li>
+          <li><strong>Locally owned · veteran operated</strong> — a real, accountable local partner.</li>
+        </ul>
+      </div>
+
+      <!-- Right: revenue-share offer -->
+      <div>
+        <div class="revshare">
+          <div class="pct">10%<small>HOST REVENUE SHARE*</small></div>
+          <p>Our standard host offer is a <strong style="color:var(--teal)">10% share of sales</strong> on a short, flexible term you can end with notice. No exclusivity headaches, no equipment liability — we carry the machine and the inventory. Let's find the right spot in your venue.</p>
+          <p class="fine">*Revenue-share percentage and terms are a starting offer and are set in a short written host placement agreement.</p>
+        </div>
+        <div class="cta" style="margin-top:18px; display:flex; gap:14px; flex-wrap:wrap;">
+          <a class="btn btn-gold" href="mailto:hello@abbotttcg.com?subject=Hosting%20a%20Card%20Stop&amp;body=Hi%20Abbott%20Trading%20Card%20Group%2C%20I'm%20interested%20in%20hosting%20a%20Card%20Stop%20at%20my%20venue.%20Here's%20a%20bit%20about%20my%20location%3A">Email about hosting</a>
+          <a class="btn btn-teal" href="tel:+18285369660">Call (828) 536-9660</a>
+        </div>
+
+        <!-- Optional: link the printable host one-pager (design reference asset). -->
+        <div class="onepager">
+          <img src="assets/one-pager-reference.png" alt="Host a Card Stop one-pager preview">
+          <div class="txt">
+            <b>Prefer a one-pager?</b>
+            <p>View the printable “Host a Card Stop” overview.</p>
+          </div>
+          <a class="btn btn-ghost" href="assets/one-pager-reference.png" target="_blank" rel="noopener" style="font-size:13px; padding:9px 16px;">View one-pager</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= [HTML] AUTHENTICITY ======================= -->
+<section class="alt" id="authenticity">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Authenticity &amp; trust</p>
+      <h2>Real product. Fair prices. No gimmicks.</h2>
+    </div>
+    <div class="seal"><b>100%</b><span>AUTHENTIC</span></div>
+    <div class="grid">
+      <div class="card"><h3>Genuine &amp; protected</h3><p>Only authentic product from legitimate channels. Packs are always factory-sealed; singles come cased and protected from the moment they drop.</p></div>
+      <div class="card"><h3>Transparent pricing</h3><p>Fair, fixed, posted prices right on the screen. You always know exactly what you're paying — before you tap.</p></div>
+      <div class="card"><h3>Independent</h3><p>Abbott Trading Card Group is an independent business and is <strong>not affiliated with, sponsored by, or endorsed by any game publisher</strong>. All product names and marks belong to their respective owners.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= [HTML] CONTACT / FOOTER ======================= -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-cta">
+      <h2>Let's bring a Card Stop to your venue</h2>
+      <p>Local, quick to respond, and easy to work with. Reach out and we'll find the right spot.</p>
+      <div class="contactline">
+        <a href="mailto:hello@abbotttcg.com">hello@abbotttcg.com</a>
+        <span>·</span>
+        <a href="tel:+18285369660">(828) 536-9660</a>
+        <span>·</span>
+        <a href="https://abbotttcg.com" target="_blank" rel="noopener">AbbottTCG.com</a>
+      </div>
+      <div><a class="btn btn-gold" href="mailto:hello@abbotttcg.com?subject=Card%20Stop%20inquiry">Email us</a></div>
+    </div>
+    <div class="foot-bottom">
+      <div>
+        <div class="wm" style="font-size:18px;"><span class="c-card">CARD</span> <span class="c-stop">STOP</span></div>
+        <div style="margin-top:6px;">by Abbott Trading Card Group · <span class="tagline"><span class="p">Pull</span> <span class="s">something</span> <span class="r">real.</span></span></div>
+        <div style="margin-top:6px;">Hurricane / St. George, Utah · AbbottTCG.com · hello@abbotttcg.com · (828) 536-9660</div>
+        <div class="badges"><span>Locally Owned</span><span>Veteran Operated</span></div>
+      </div>
+      <div class="disc">Operated by <b>Abbott Trading Card Group</b>, a DBA of Abbott LLC (Utah). Independent — not affiliated with, sponsored by, or endorsed by any game publisher. All product names and marks belong to their respective owners. © <span id="yr"></span> Abbott LLC. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<!-- Tiny inline script: just sets the current year in the footer. No other JS. -->
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>
