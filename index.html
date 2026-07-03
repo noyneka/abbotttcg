@@ -16,8 +16,8 @@
        [HTML] HERO .......................... machine render + headline
        [HTML] ELEMENTAL BAR ................. holographic accent strip
        [HTML] WHAT IT IS .................... brand intro + feature cards
-       [HTML] THE MACHINE ................... VTM Slim Tower 2.0 specs
-       [HTML] WHAT'S INSIDE ................. two configurations
+       [HTML] THE MACHINE ................... The Card Stop specs
+       [HTML] WHAT'S INSIDE ................. two mystery products
        [HTML] HOW IT WORKS .................. consumer buy flow
        [HTML] HOST A CARD STOP .............. venue-owner pitch (revenue share)
        [HTML] AUTHENTICITY .................. trust / disclaimers
@@ -38,7 +38,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="CARD STOP — Pull Something Real">
 <meta property="og:description" content="Authentic trading-card vending machines by Abbott Trading Card Group. 100% real product, fair posted prices. Host one at your venue.">
-<meta property="og:image" content="assets/card-stop-machine.png">
+<meta property="og:image" content="assets/dark-logo.jpg">
 <meta property="og:url" content="https://abbotttcg.com/">
 
 <!-- Inline SVG favicon: a gold "gate/portal" mark echoing the CARD STOP icon.
@@ -123,29 +123,23 @@ a{ color:inherit; text-decoration:none; }
 /* =========================================================================
    [CSS] HEADER
    ========================================================================= */
-header{ position:sticky; top:0; z-index:60; background:rgba(20,30,52,.94); backdrop-filter:blur(8px);
+header{ position:sticky; top:0; z-index:60; background:rgba(10,15,28,.96); backdrop-filter:blur(8px);
   border-bottom:1px solid var(--line-dk); }
-.nav{ display:flex; align-items:center; gap:16px; height:70px; }
-.brand{ display:flex; align-items:center; gap:12px; }
+.nav{ display:flex; align-items:center; gap:16px; height:96px; }
+.brand{ display:flex; align-items:center; }
 
-/* LOGO PLACEHOLDER --------------------------------------------------------
-   The header logo below crops the *primary brand sheet* down to the
-   horizontal CARD STOP lockup (there is no isolated logo file yet).
-   TO REPLACE: export a transparent-background logo (e.g. assets/card-stop-logo.png)
-   then (1) set it as the <img src> in the [HTML] HEADER, and
-           (2) delete the .logo-crop offsets below and use  .logo-crop img{position:static;width:auto;height:44px}
-   ------------------------------------------------------------------------- */
-.logo-crop{ position:relative; width:78px; height:50px; overflow:hidden; border-radius:8px;
-  border:1px solid rgba(242,181,68,.28); flex:0 0 auto; background:#0f1b2f; }
-.logo-crop img{ position:absolute; left:-206px; top:-94px; width:358px; height:auto; max-width:none; }
-.brand .bname{ display:flex; flex-direction:column; line-height:1.1; }
-.brand .bname b{ font-family:'Montserrat',Arial,sans-serif; font-weight:800; color:var(--bone); font-size:13.5px; letter-spacing:.3px; }
-.brand .bname span{ font-size:9px; letter-spacing:2px; font-weight:700; text-transform:uppercase; }
+/* HEADER LOGO — full CARD STOP lockup image (assets/dark-logo.jpg).
+   Image-only: the wordmark, "by Abbott Trading Card Group", and the tagline
+   are baked into the artwork, so no separate text is rendered beside it.
+   The art sits on a near-black ground that blends into the darkened header;
+   corners are lightly rounded so the JPEG edge reads as an intentional tile. */
+.logo-img{ height:72px; width:auto; display:block; border-radius:10px; }
+@media(max-width:820px){ .logo-img{ height:54px; } }
 .nav .links{ margin-left:auto; display:flex; align-items:center; gap:26px; }
 .nav .links a.navlink{ color:#cfd6e6; font-weight:600; font-size:14.5px; }
 .nav .links a.navlink:hover{ color:var(--gold); }
 .nav .links .btn{ padding:10px 18px; font-size:14px; }
-@media(max-width:820px){ .nav .links a.navlink{ display:none; } .brand .bname{ display:none; } }
+@media(max-width:820px){ .nav .links a.navlink{ display:none; } }
 
 /* =========================================================================
    [CSS] HERO
@@ -210,9 +204,11 @@ section{ padding:66px 0; }
 .spec .lbl{ font-size:13px; color:#c7cfe0; margin-top:8px; }
 .machine-lead{ display:grid; grid-template-columns:.8fr 1.2fr; gap:34px; align-items:center; margin-bottom:36px; }
 @media(max-width:820px){ .machine-lead{ grid-template-columns:1fr; } }
-.machine-lead .shot{ background:linear-gradient(180deg,#eef4f4,#e6efee); border:1px solid var(--line); border-radius:18px; padding:14px; text-align:center; }
-.machine-lead .shot img{ margin:0 auto; max-height:360px; width:auto; }
-.machine-lead .shot small{ display:block; color:var(--muted); font-size:12px; margin-top:8px; }
+/* Borderless machine cutout — the transparent PNG floats freely with a soft
+   drop-shadow. No box, frame, border, or background fill of any kind. */
+.machine-lead .shot{ position:relative; text-align:center; background:transparent; border:0; padding:0; }
+.machine-lead .shot img{ position:relative; z-index:1; margin:0 auto; max-height:460px; width:auto;
+  filter:drop-shadow(0 22px 36px rgba(17,28,48,.30)); }
 
 /* =========================================================================
    [CSS] WHAT'S INSIDE — framed section (uses card-stop-frame.png as ambient bg)
@@ -311,20 +307,15 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
   <div class="wrap">
     <nav class="nav">
       <a class="brand" href="#top" aria-label="CARD STOP by Abbott Trading Card Group — home">
-        <!-- LOGO PLACEHOLDER: cropped from assets/card-stop-logo-system.png (see .logo-crop CSS notes). -->
-        <span class="logo-crop">
-          <img src="assets/card-stop-logo-system.png" alt="CARD STOP by Abbott Trading Card Group logo">
-        </span>
-        <span class="bname">
-          <b>CARD STOP</b>
-          <span class="tagline"><span class="p">by</span> Abbott Trading Card Group</span>
-        </span>
+        <!-- Header logo: full CARD STOP lockup artwork, image only (no separate text). -->
+        <img class="logo-img" src="assets/dark-logo.jpg" alt="CARD STOP by Abbott Trading Card Group">
       </a>
       <div class="links">
         <a class="navlink" href="#machine">The machine</a>
         <a class="navlink" href="#inside">What's inside</a>
         <a class="navlink" href="#how">How it works</a>
         <a class="navlink" href="#host">Host a Card Stop</a>
+        <a class="navlink" href="claim.html">Chase claim</a>
         <a class="btn btn-gold" href="#host">Host a Card Stop</a>
       </div>
     </nav>
@@ -357,10 +348,9 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
           <span><b>Locally owned</b> · veteran operated</span>
         </div>
       </div>
-      <!-- Machine hero: transparent cutout of the VTM Slim Tower 2.0 render.
-           Swap for a real photo or a transparent product render when available. -->
+      <!-- Machine hero: borderless transparent cutout of The Card Stop machine. -->
       <div class="machine-wrap">
-        <img src="assets/card-stop-machine-cutout.png" alt="CARD STOP trading-card vending machine — a wrapped free-standing tower with a large touchscreen">
+        <img src="assets/card-stop-machine-cutout.png" alt="The Card Stop trading-card vending machine — a free-standing tower with a large touchscreen">
       </div>
     </div>
   </div>
@@ -378,41 +368,40 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
       <h2>A trading-card shop, in a machine</h2>
       <p>Abbott Trading Card Group owns, stocks, and services every
         <span class="wm"><span class="c-card">CARD</span> <span class="c-stop">STOP</span></span> —
-        bringing genuine, sealed trading cards within arm's reach at honest prices, with none of the mystery-box gimmicks.</p>
+        bringing genuine, cased trading cards within arm's reach at one flat, honest price per pull. Real product, every time.</p>
     </div>
     <div class="grid">
-      <div class="card"><div class="ic">✓</div><h3>100% authentic</h3><p>Only genuine product from legitimate channels. Sealed packs and cased singles — what you get is always real.</p></div>
-      <div class="card"><div class="ic">$</div><h3>Fair, posted prices</h3><p>Clear prices right on the 43″ screen. No mystery boxes, no markup games — just honest value.</p></div>
+      <div class="card"><div class="ic">✓</div><h3>100% authentic</h3><p>Only genuine product from legitimate channels. Cased packs and cased singles — what you get is always real.</p></div>
+      <div class="card"><div class="ic">$</div><h3>One flat price</h3><p>Every product is a single flat price, posted right on the 43″ screen. No markup games — just honest value on genuine product.</p></div>
       <div class="card"><div class="ic">⌁</div><h3>Tap &amp; go</h3><p>Fast, cashless checkout by tap or card on a bright touchscreen. Built for busy, family-friendly venues.</p></div>
       <div class="card"><div class="ic">★</div><h3>Local &amp; veteran-operated</h3><p>A real local partner based in Hurricane / St. George, Utah — quick to respond and accountable.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ======================= [HTML] THE MACHINE (VTM Slim Tower 2.0) ======================= -->
+<!-- ======================= [HTML] THE MACHINE (The Card Stop) ======================= -->
 <section class="alt" id="machine">
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow">The machine</p>
-      <h2>Meet the VTM Slim Tower 2.0</h2>
-      <p>A clean, free-standing tower with a big, bright touchscreen and a small footprint — designed to look premium in any venue and keep the line moving.</p>
+      <h2>Meet The Card Stop</h2>
+      <p>Our own clean, free-standing tower with a big, bright touchscreen and a small footprint — designed to look premium in any venue and keep the line moving.</p>
     </div>
 
     <div class="machine-lead">
       <div class="shot">
-        <!-- Full render (with its studio backdrop). Replace with an on-site photo when you have one. -->
-        <img src="assets/card-stop-machine.png" alt="CARD STOP VTM Slim Tower 2.0 vending machine, full view">
-        <small>CARD STOP wrap on the VTM Slim Tower 2.0 · illustrative render</small>
+        <!-- Borderless transparent cutout of The Card Stop machine. -->
+        <img src="assets/card-stop-machine-cutout.png" alt="The Card Stop trading-card vending machine">
       </div>
       <div class="specs">
         <div class="spec"><div class="big">Slim</div><div class="lbl">Free-standing tower — a compact ~2 ft × 2 ft footprint and a standard outlet.</div></div>
-        <div class="spec"><div class="big">43″</div><div class="lbl">Large HD touchscreen to browse products and check out.</div></div>
+        <div class="spec"><div class="big">43″</div><div class="lbl">Large HD touchscreen with a bright, easy tap-to-buy checkout.</div></div>
         <div class="spec"><div class="big">Tap</div><div class="lbl">Cashless — contactless tap and card payment. Fast, reliable checkout.</div></div>
         <div class="spec"><div class="big">456</div><div class="lbl">Pack capacity — deep inventory means fewer restocks and more uptime.</div></div>
       </div>
     </div>
     <p class="sec-head" style="margin:0 auto; color:var(--muted); font-size:14px; max-width:760px;">
-      Full-color custom CARD STOP wrap with accent lighting — an eye-catching draw that still reads clean and retail-friendly.
+      Bold, full-color Card Stop artwork with accent lighting — an eye-catching draw that still reads clean and retail-friendly.
     </p>
   </div>
 </section>
@@ -424,26 +413,25 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
     <div class="sec-head">
       <p class="eyebrow">What's inside</p>
       <h2>Two ways to pull</h2>
-      <p>Every Card Stop is stocked with genuine product in one of two configurations. Either way, you always get authentic cards at a fair, posted price.</p>
+      <p>One machine, two mystery pulls. Pick a slot and The Card Stop drops a random, authentic item — every one genuine, every one at a single flat price. You don't choose the card; the surprise is the whole point.</p>
     </div>
     <div class="configs">
       <div class="config packs">
-        <span class="tag">CONFIGURATION · SEALED BOOSTER PACKS</span>
-        <h3>Sealed booster packs</h3>
-        <p>Factory-sealed, 100% authentic booster packs — exactly as they leave the manufacturer. Browse the lineup on screen, tap to buy, and the machine dispenses your sealed pack. Real product, honest price, every time.</p>
-        <!-- PRICE PLACEHOLDER — confirm your final pack prices before launch. -->
-        <p class="price">Packs from $X.XX · set your final prices before launch</p>
+        <span class="tag">MYSTERY PULL · CASED BOOSTER PACKS</span>
+        <h3>Cased mystery booster packs</h3>
+        <p>Pick a slot and the machine drops a random, factory-sealed booster pack in a protective top-loader case. You won't know which pack until it lands — that's the fun. Every pack is 100% authentic, sealed, and cased the moment it drops.</p>
+        <p class="price">Flat $27 per pull · every slot, one price</p>
       </div>
       <div class="config singles">
-        <span class="tag">CONFIGURATION · MYSTERY SINGLES</span>
+        <span class="tag">MYSTERY PULL · CASED SINGLES</span>
         <h3>Cased mystery singles</h3>
-        <p>On this machine, singles vend as <strong>cased mystery singles</strong> — each authentic single card sealed in a protective case. The exact card is a surprise until you open it, and every single is genuine and protected from the moment it drops.</p>
-        <!-- PRICE PLACEHOLDER — confirm your final single prices before launch. -->
-        <p class="price">Singles from $X.XX · set your final prices before launch</p>
+        <p>Pick a slot and the machine drops a random authentic single, cased and protected from the moment it lands. The exact card is a surprise every time — and a lucky slot can hide a <strong>chase card</strong> worth coming back for.</p>
+        <p class="price">Flat $1 per pull · every slot, one price</p>
+        <p style="margin-top:10px; font-size:13.5px;"><a href="claim.html" style="color:var(--teal); font-weight:700;">Pulled a chase? Claim it →</a></p>
       </div>
     </div>
     <p class="sec-head" style="margin:26px auto 0; color:var(--muted); font-size:13.5px; max-width:760px;">
-      The machine selects which item is dispensed from the on-screen lineup — every purchase is genuine, authentic product at the single posted price.
+      You pick a slot — the machine drops a random item from it. No choosing a specific card, no cherry-picking. Every pull is genuine, authentic product at the single flat, posted price.
     </p>
   </div>
 </section>
@@ -456,9 +444,9 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
       <h2>Pull something real in four taps</h2>
     </div>
     <div class="steps">
-      <div class="step"><div class="n">1</div><h4>Browse the screen</h4><p>See the lineup and posted prices on the 43″ touchscreen.</p></div>
+      <div class="step"><div class="n">1</div><h4>Pick a slot</h4><p>Tap any slot on the 43″ screen — one flat price, every slot a mystery.</p></div>
       <div class="step"><div class="n">2</div><h4>Tap or pay by card</h4><p>Fast, cashless checkout — no app, no account.</p></div>
-      <div class="step"><div class="n">3</div><h4>The machine vends</h4><p>Your sealed pack or cased single drops to the tray.</p></div>
+      <div class="step"><div class="n">3</div><h4>The machine vends</h4><p>Your random cased pack or single drops to the tray.</p></div>
       <div class="step"><div class="n">4</div><h4>Grab &amp; go</h4><p>Genuine, protected product in hand. Pull something real.</p></div>
     </div>
   </div>
@@ -493,9 +481,9 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
 
         <h3 class="blk" style="margin-top:28px;">Why Abbott Trading Card Group</h3>
         <ul class="checks">
-          <li><strong>100% authentic product</strong> — sealed booster packs and cased singles, every time.</li>
-          <li><strong>Tamper-evident &amp; sealed</strong> — packs factory-sealed; singles cased and protected.</li>
-          <li><strong>Fair, fixed, posted prices</strong> — no mystery, no markup games.</li>
+          <li><strong>100% authentic product</strong> — cased booster packs and cased singles, every time.</li>
+          <li><strong>Tamper-evident &amp; sealed</strong> — packs factory-sealed and cased; singles cased and protected.</li>
+          <li><strong>Fair, fixed, posted prices</strong> — one flat price per product, no markup games.</li>
           <li><strong>Accepts tap &amp; card</strong> — modern, reliable, low-friction checkout.</li>
           <li><strong>Locally owned · veteran operated</strong> — a real, accountable local partner.</li>
         </ul>
@@ -513,14 +501,13 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
           <a class="btn btn-teal" href="tel:+18285369660">Call (828) 536-9660</a>
         </div>
 
-        <!-- Optional: link the printable host one-pager (design reference asset). -->
+        <!-- Printable host one-pager: downloadable single-page PDF. -->
         <div class="onepager">
-          <img src="assets/one-pager-reference.png" alt="Host a Card Stop one-pager preview">
           <div class="txt">
             <b>Prefer a one-pager?</b>
-            <p>View the printable “Host a Card Stop” overview.</p>
+            <p>Grab the printable “Host a Card Stop” overview to share or print.</p>
           </div>
-          <a class="btn btn-ghost" href="assets/one-pager-reference.png" target="_blank" rel="noopener" style="font-size:13px; padding:9px 16px;">View one-pager</a>
+          <a class="btn btn-gold" href="assets/Card-Stop-Host-One-Pager.pdf" download style="font-size:13px; padding:9px 16px;">Download the one-pager (PDF)</a>
         </div>
       </div>
     </div>
@@ -532,12 +519,12 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow">Authenticity &amp; trust</p>
-      <h2>Real product. Fair prices. No gimmicks.</h2>
+      <h2>Real product. One flat price. Every pull authentic.</h2>
     </div>
     <div class="seal"><b>100%</b><span>AUTHENTIC</span></div>
     <div class="grid">
-      <div class="card"><h3>Genuine &amp; protected</h3><p>Only authentic product from legitimate channels. Packs are always factory-sealed; singles come cased and protected from the moment they drop.</p></div>
-      <div class="card"><h3>Transparent pricing</h3><p>Fair, fixed, posted prices right on the screen. You always know exactly what you're paying — before you tap.</p></div>
+      <div class="card"><h3>Genuine &amp; protected</h3><p>Only authentic product from legitimate channels. Packs are factory-sealed and cased; singles come cased and protected from the moment they drop.</p></div>
+      <div class="card"><h3>Transparent pricing</h3><p>One flat price per product, posted right on the screen. You always know exactly what you'll pay before you tap — even though the exact card stays a surprise.</p></div>
       <div class="card"><h3>Independent</h3><p>Abbott Trading Card Group is an independent business and is <strong>not affiliated with, sponsored by, or endorsed by any game publisher</strong>. All product names and marks belong to their respective owners.</p></div>
     </div>
   </div>
