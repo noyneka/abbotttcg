@@ -13,10 +13,10 @@
      the same fonts, header, and footer so it feels like one site.
 
      WHAT A CUSTOMER DOES HERE:
-       A customer who pulled a winning "chase" cased single scans the QR on the
-       hidden insert (or types its code), lands on THIS page, and submits the
-       claim form. Abbott Trading Card Group verifies the code by hand, then
-       ships the graded card (insured & tracked) or arranges local pickup.
+       A customer who pulled a winning "chase" cased single uses the hidden
+       insert that came with it to reach THIS page, then submits the claim
+       form. Abbott Trading Card Group verifies the claim by hand, then ships
+       the graded card (insured & tracked) or arranges local pickup.
 
      >>> THE ONE THING TO FINISH <<<
        This page embeds a Google Form. Until you paste your form's embed URL,
@@ -113,21 +113,25 @@ a{ color:inherit; text-decoration:none; }
 /* =========================================================================
    [CSS] HEADER  (matches index.html)
    ========================================================================= */
-header{ position:sticky; top:0; z-index:60; background:rgba(20,30,52,.94); backdrop-filter:blur(8px);
+header{ position:sticky; top:0; z-index:60; background:rgba(10,15,28,.96); backdrop-filter:blur(8px);
   border-bottom:1px solid var(--line-dk); }
-.nav{ display:flex; align-items:center; gap:16px; height:70px; }
-.brand{ display:flex; align-items:center; gap:12px; }
-.logo-crop{ position:relative; width:78px; height:50px; overflow:hidden; border-radius:8px;
-  border:1px solid rgba(242,181,68,.28); flex:0 0 auto; background:#0f1b2f; }
-.logo-crop img{ position:absolute; left:-206px; top:-94px; width:358px; height:auto; max-width:none; }
-.brand .bname{ display:flex; flex-direction:column; line-height:1.1; }
-.brand .bname b{ font-family:'Montserrat',Arial,sans-serif; font-weight:800; color:var(--bone); font-size:13.5px; letter-spacing:.3px; }
-.brand .bname span{ font-size:9px; letter-spacing:2px; font-weight:700; text-transform:uppercase; }
+.nav{ display:flex; align-items:center; gap:16px; height:64px; }
+.brand{ display:flex; align-items:center; }
+
+/* HEADER BRAND — text wordmark lockup (no image).
+   Reuses the metallic .wm treatment (chrome "CARD" + gold "STOP") with a small
+   "by Abbott Trading Card Group" attribution line beneath it. This keeps the
+   header at a normal height instead of the taller image-based lockup. */
+.brand-lockup{ display:flex; flex-direction:column; line-height:1; }
+.brand-wm{ display:inline-block; font-size:23px; letter-spacing:.5px; }
+.brand-by{ font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:9.5px;
+  letter-spacing:1.6px; text-transform:uppercase; color:#aeb6c8; margin-top:5px; }
+@media(max-width:820px){ .brand-wm{ font-size:20px; } .brand-by{ font-size:9px; letter-spacing:1.3px; } }
 .nav .links{ margin-left:auto; display:flex; align-items:center; gap:26px; }
 .nav .links a.navlink{ color:#cfd6e6; font-weight:600; font-size:14.5px; }
 .nav .links a.navlink:hover{ color:var(--gold); }
 .nav .links .btn{ padding:10px 18px; font-size:14px; }
-@media(max-width:820px){ .nav .links a.navlink{ display:none; } .brand .bname{ display:none; } }
+@media(max-width:820px){ .nav .links a.navlink{ display:none; } }
 
 /* =========================================================================
    [CSS] CLAIM HERO  — compact dark header (echoes the main hero background)
@@ -143,6 +147,13 @@ header{ position:sticky; top:0; z-index:60; background:rgba(20,30,52,.94); backd
 .claim-hero h1 .win{ color:var(--gold); }
 .claim-hero p.sub{ color:#cdd4e4; font-size:clamp(15px,2.1vw,18px); max-width:600px; margin:18px auto 0; }
 .claim-hero .wm{ display:inline-block; }
+/* Hero brand image: the full CARD STOP lockup (assets/dark-logo.jpg) centered
+   above the eyebrow + headline as the page's main visual — mirrors index.html's
+   .hero-logo. Responsive with a sensible cap; rounded corners + a soft shadow
+   let the JPEG's dark ground read as an intentional framed mark on the dark hero. */
+.claim-hero .hero-logo{ width:100%; max-width:440px; height:auto; margin:0 auto 26px;
+  border-radius:14px; box-shadow:0 18px 44px rgba(0,0,0,.45); }
+@media(max-width:900px){ .claim-hero .hero-logo{ max-width:380px; margin-bottom:22px; } }
 
 /* =========================================================================
    [CSS] ELEMENTAL ACCENT BAR  (matches index.html)
@@ -187,7 +198,6 @@ ul.checks li{ position:relative; padding-left:30px; margin:13px 0; font-size:15p
 ul.checks li::before{ content:"✓"; position:absolute; left:0; top:1px; color:var(--teal); font-weight:800; font-size:16px; }
 ul.checks li strong{ color:var(--indigo); }
 .ready .optional{ color:var(--muted); }
-.ready .code-eg{ font-family:'Montserrat',Arial,sans-serif; font-weight:800; color:var(--ember); letter-spacing:.5px; }
 
 /* =========================================================================
    [CSS] THE EMBEDDED FORM
@@ -246,13 +256,10 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
   <div class="wrap">
     <nav class="nav">
       <a class="brand" href="index.html" aria-label="CARD STOP by Abbott Trading Card Group — home">
-        <!-- LOGO PLACEHOLDER: cropped from assets/card-stop-logo-system.png (same as index.html). -->
-        <span class="logo-crop">
-          <img src="assets/card-stop-logo-system.png" alt="CARD STOP by Abbott Trading Card Group logo">
-        </span>
-        <span class="bname">
-          <b>CARD STOP</b>
-          <span class="tagline"><span class="p">by</span> Abbott Trading Card Group</span>
+        <!-- Header brand: text wordmark (chrome "CARD" + gold "STOP") with a small attribution line. -->
+        <span class="brand-lockup">
+          <span class="wm brand-wm"><span class="c-card">CARD</span> <span class="c-stop">STOP</span></span>
+          <span class="brand-by">by Abbott Trading Card Group</span>
         </span>
       </a>
       <div class="links">
@@ -268,18 +275,20 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
 <!-- ======================= [HTML] CLAIM HERO ======================= -->
 <section class="claim-hero">
   <div class="wrap">
+    <!-- Hero brand image: full CARD STOP lockup, centered as the page's main visual (mirrors index.html's hero logo). -->
+    <img class="hero-logo" src="assets/dark-logo.jpg" alt="CARD STOP by Abbott Trading Card Group — Pull Something Real">
     <p class="eyebrow kicker">Chase-card prize claim</p>
     <h1>You pulled a <span class="win">winner</span>?<br>Let's get your card to you.</h1>
     <p class="sub">If your cased mystery single from a
       <span class="wm"><span class="c-card">CARD</span> <span class="c-stop">STOP</span></span>
       machine held a hidden winner insert, you're in the right place. Submit your claim below —
-      we verify every winning code by hand, then ship your authentic graded card or arrange local pickup.</p>
+      we verify every winning claim by hand, then ship your authentic graded card or arrange local pickup.</p>
   </div>
 </section>
 
 <!-- ======================= [HTML] ELEMENTAL ACCENT BAR ======================= -->
 <div class="elembar" aria-hidden="true"></div>
-<div class="elemnote">Real cards. Real prizes. <b>Every winning code is verified before anything ships.</b></div>
+<div class="elemnote">Real cards. Real prizes. <b>Every winning claim is verified before anything ships.</b></div>
 
 <!-- ======================= [HTML] HOW THE CLAIM WORKS ======================= -->
 <section id="how">
@@ -290,9 +299,9 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
       <p>Simple and human — no app and no account required to submit your claim.</p>
     </div>
     <div class="steps">
-      <div class="step"><div class="n">1</div><h4>Scan or enter your code</h4><p>Open the insert from your winning case and scan its QR (or type the code) — it opens this claim form.</p></div>
+      <div class="step"><div class="n">1</div><h4>Start your claim</h4><p>Use the insert that came tucked in with your winning card — it brings you right here to the claim form.</p></div>
       <div class="step"><div class="n">2</div><h4>Submit the claim</h4><p>Add your name, contact, and where to send the prize. Takes about a minute.</p></div>
-      <div class="step"><div class="n">3</div><h4>We verify by hand</h4><p>We confirm your code against our records to make sure it's a real, unclaimed winner.</p></div>
+      <div class="step"><div class="n">3</div><h4>We verify by hand</h4><p>We review your claim against our records to make sure it's a real, unclaimed winner.</p></div>
       <div class="step"><div class="n">4</div><h4>We get it to you</h4><p>Your authentic graded card ships insured &amp; tracked — or we arrange a local handoff if you're nearby.</p></div>
     </div>
   </div>
@@ -308,11 +317,10 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
         <h3>What to have ready</h3>
         <p class="lead">Have these on hand before you start so your claim goes through smoothly:</p>
         <ul class="checks">
-          <li><strong>The winning card &amp; insert.</strong> Keep the card and the hidden winner insert you pulled — don't toss the insert; it carries your code.</li>
-          <li><strong>Your code.</strong> The short code printed on the insert, like <span class="code-eg">CS01-XXXXXXXX</span>. Scanning the QR fills it in for you.</li>
-          <li><strong>Machine ID / location.</strong> Which CARD STOP machine or venue you pulled it at (the code's prefix, e.g. <span class="code-eg">CS01</span>, points to the machine).</li>
-          <li><strong>Date pulled.</strong> Roughly when you bought the card.</li>
-          <li><strong>A photo <span class="optional">(optional).</span></strong> A quick photo of the card and insert helps us verify faster. See the note under the form for how to send it.</li>
+          <li><strong>Your winning card &amp; the insert it came with.</strong> Keep the two together — hold onto the insert that was tucked in with your winning card.</li>
+          <li><strong>Roughly when &amp; where you pulled it.</strong> An approximate date, plus the spot or venue where you found the machine.</li>
+          <li><strong>Your contact details.</strong> A name and an email or phone number so we can reach you to arrange your prize.</li>
+          <li><strong>A photo <span class="optional">(optional).</span></strong> A quick photo of your card and insert helps us confirm faster. See the note under the form for how to send it.</li>
         </ul>
       </div>
 
@@ -368,7 +376,7 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
         <!-- Reassurance / what happens next -->
         <div class="callout">
           <h3>What happens next</h3>
-          <p>We check your code against our records to confirm it's a genuine, unclaimed winner, then reach out by email to arrange delivery. Authentic graded cards ship <strong>insured &amp; tracked</strong>, or we set up a local handoff if you're nearby.</p>
+          <p>We review your claim against our records to confirm it's a genuine, unclaimed winner, then reach out by email to arrange delivery. Authentic graded cards ship <strong>insured &amp; tracked</strong>, or we set up a local handoff if you're nearby.</p>
           <p class="fine">Abbott Trading Card Group verifies every claim before any prize is sent. We'll only use your contact details to fulfill and confirm your prize.</p>
           <!-- ODDS / ALTERNATE-ENTRY SLOT (pending counsel — leave OFF).
                Per 11-Chase-Card-Prize-System-Workflow.md §9, any plain-language odds/seeding
