@@ -30,14 +30,14 @@
        • All brand colors are CSS variables in :root so you can retune once.
 ========================================================================== -->
 
-<title>CARD STOP — Authentic Trading Cards, Right Where the Fun Is | Abbott Trading Card Group</title>
-<meta name="description" content="CARD STOP by Abbott Trading Card Group — modern, fully managed trading-card vending machines placed in high-traffic venues across southern Utah. 100% authentic product at fair, posted prices. Host a Card Stop at your venue and earn a share of every sale.">
+<title>CARD STOP — Authentic Pokémon Cards & Sealed Booster Packs | Abbott Trading Card Group</title>
+<meta name="description" content="CARD STOP by Abbott Trading Card Group — modern, fully managed vending machines that sell 100% authentic Pokémon cards and sealed, cased Pokémon booster packs at fair, posted prices across southern Utah. Host a Card Stop at your venue and earn a share of every sale.">
 <meta name="theme-color" content="#1B2A4A">
 
 <!-- Open Graph / social preview (update URL + image when live) -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="CARD STOP — Pull Something Real">
-<meta property="og:description" content="Authentic trading-card vending machines by Abbott Trading Card Group. 100% real product, fair posted prices. Host one at your venue.">
+<meta property="og:title" content="CARD STOP — Authentic Pokémon, Pull Something Real">
+<meta property="og:description" content="Authentic Pokémon card vending machines by Abbott Trading Card Group. 100% real, sealed product at fair posted prices. Host one at your venue.">
 <meta property="og:image" content="assets/dark-logo.jpg">
 <meta property="og:url" content="https://abbotttcg.com/">
 
@@ -308,6 +308,32 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
 .foot-bottom b{ color:var(--ember); }
 .badges{ display:flex; gap:10px 16px; flex-wrap:wrap; margin-top:6px; font-weight:700; color:#c7cfe0; font-size:12.5px; }
 .badges span::before{ content:"★ "; color:var(--gold); }
+
+/* =========================================================================
+   [CSS] POKÉMON / MARKET + HOW-TO-PLAY + CONTRAST FIX + DISCLAIMER
+   ========================================================================= */
+/* "Why Pokémon" market note under the stat cards. */
+.why-note{ text-align:center; color:var(--muted); font-size:13px; max-width:760px; margin:20px auto 0; }
+
+/* "How to play" mini-flow inside the What's-inside product cards. */
+.playhead{ font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:11px; letter-spacing:1.2px;
+  text-transform:uppercase; color:var(--ember); margin:16px 0 10px; }
+.playsteps{ list-style:none; counter-reset:ps; }
+.playsteps li{ position:relative; padding-left:34px; margin:9px 0; font-size:14px; color:var(--muted); }
+.playsteps li::before{ counter-increment:ps; content:counter(ps); position:absolute; left:0; top:-2px;
+  width:24px; height:24px; border-radius:50%; background:var(--holo); color:#0e1a2e;
+  font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:12.5px;
+  display:flex; align-items:center; justify-content:center; }
+
+/* CONTRAST FIX — "How hosting works" step headers/text sit on the dark host bg.
+   Base .step h4 is dark indigo (for the light consumer section); override here
+   so the four host step headers read clearly (gold) with light body text. */
+.host .hoststeps .step h4{ color:var(--gold); }
+.host .hoststeps .step p{ color:#c7cfe0; }
+
+/* Pokémon trademark disclaimer (footer, text only — no logo image). */
+.pkmn-disc{ border-top:1px solid var(--line-dk); margin-top:18px; padding-top:16px;
+  font-size:11.5px; line-height:1.65; color:#9aa3b8; }
 </style>
 </head>
 <body id="top">
@@ -342,7 +368,7 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
       <div class="hero-copy">
         <!-- Hero brand image: full CARD STOP lockup, centered above the eyebrow + headline. -->
         <img class="hero-logo" src="assets/dark-logo.jpg" alt="CARD STOP by Abbott Trading Card Group — Pull Something Real">
-        <p class="eyebrow kicker">Authentic trading-card vending · Southern Utah</p>
+        <p class="eyebrow kicker">Authentic Pokémon cards · Southern Utah</p>
         <h1>Real cards.<br>Real fun.<br>
           <span class="tagline" style="font-size:.62em; display:inline-block; margin-top:.15em;">
             <span class="p">Pull</span> <span class="s">something</span> <span class="r">real.</span>
@@ -350,14 +376,15 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
         </h1>
         <p class="sub">Abbott Trading Card Group builds, owns, stocks, and services
           <span class="wm"><span class="c-card">CARD</span> <span class="c-stop">STOP</span></span> —
-          a modern, fully managed trading-card vending machine — and places it where people already gather.
-          100% authentic product at fair, posted prices.</p>
+          a modern, fully managed Pokémon card vending machine — and places it where people already gather.
+          100% authentic, sealed Pokémon product at fair, posted prices.</p>
         <div class="cta">
           <a class="btn btn-gold" href="#host">Host a Card Stop at your venue</a>
           <a class="btn btn-ghost" href="#how">See how it works</a>
         </div>
         <div class="chips">
-          <span><b>100%</b> authentic product</span>
+          <span><b>100%</b> authentic Pokémon</span>
+          <span><b>Sealed</b> &amp; cased</span>
           <span><b>Fair</b> posted prices</span>
           <span><b>Tap</b> &amp; card payment</span>
           <span><b>Locally owned</b> · veteran operated</span>
@@ -373,24 +400,42 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
 
 <!-- ======================= [HTML] ELEMENTAL ACCENT BAR ======================= -->
 <div class="elembar" aria-hidden="true"></div>
-<div class="elemnote">Five elements. Endless pulls. <b>Electric · Water · Grass · Fire</b> — and the crystal core.</div>
+<div class="elemnote"><b>Electric · Water · Grass · Fire</b> — four elements, one mystery. Every pull is an authentic, sealed Pokémon card.</div>
 
 <!-- ======================= [HTML] WHAT IT IS ======================= -->
 <section id="about">
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow">What is Card Stop?</p>
-      <h2>A trading-card shop, in a machine</h2>
+      <h2>A Pokémon card shop, in a machine</h2>
       <p>Abbott Trading Card Group owns, stocks, and services every
         <span class="wm"><span class="c-card">CARD</span> <span class="c-stop">STOP</span></span> —
-        bringing genuine, cased trading cards within arm's reach at one flat, honest price per pull. Real product, every time.</p>
+        bringing genuine, cased Pokémon cards and sealed booster packs within arm's reach at one flat, honest price per pull. Real product, every time.</p>
     </div>
     <div class="grid">
-      <div class="card"><div class="ic">✓</div><h3>100% authentic</h3><p>Only genuine product from legitimate channels. Cased packs and cased singles — what you get is always real.</p></div>
+      <div class="card"><div class="ic">✓</div><h3>100% authentic Pokémon</h3><p>Only genuine Pokémon product from legitimate channels. Sealed, cased booster packs and cased singles — what you get is always real.</p></div>
       <div class="card"><div class="ic">$</div><h3>One flat price</h3><p>Every product is a single flat price, posted right on the 43″ screen. No markup games — just honest value on genuine product.</p></div>
       <div class="card"><div class="ic">⌁</div><h3>Tap &amp; go</h3><p>Fast, cashless checkout by tap or card on a bright touchscreen. Built for busy, family-friendly venues.</p></div>
       <div class="card"><div class="ic">★</div><h3>Local &amp; veteran-operated</h3><p>A real local partner based in Hurricane / St. George, Utah — quick to respond and accountable.</p></div>
     </div>
+  </div>
+</section>
+
+<!-- ======================= [HTML] WHY POKÉMON (market) ======================= -->
+<section id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Why Pokémon</p>
+      <h2>The most-wanted cards in the world</h2>
+      <p>Trading cards are booming — and Pokémon leads the pack. In early 2025, toys &amp; collectibles were the fastest-growing U.S. retail category, driven by Pokémon. The Card Stop puts authentic, sealed Pokémon product right where that demand already is.</p>
+    </div>
+    <div class="specs">
+      <div class="spec"><div class="big">#1</div><div class="lbl">Pokémon is the world's #1 trading card game — <strong>10.2 billion</strong> cards printed in FY2024–25.</div></div>
+      <div class="spec"><div class="big">$14B</div><div class="lbl">Estimated size of the global trading-card game market in 2025 — and still growing.</div></div>
+      <div class="spec"><div class="big">~200%</div><div class="lbl">Jump in U.S. trading-card retail sales from 2024 to 2025.</div></div>
+      <div class="spec"><div class="big">20M+</div><div class="lbl">Cards professionally graded in 2024 — up about 16% year over year.</div></div>
+    </div>
+    <p class="why-note">Industry figures, 2025 — shown to illustrate category demand, not a forecast of any specific machine's sales.</p>
   </div>
 </section>
 
@@ -427,26 +472,38 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow">What's inside</p>
-      <h2>Two ways to pull</h2>
-      <p>One machine, two mystery pulls. Pick a slot and The Card Stop drops a random, authentic item — every one genuine, every one at a single flat price. You don't choose the card; the surprise is the whole point.</p>
+      <h2>Two ways to play</h2>
+      <p>One machine, two mystery pulls — all authentic Pokémon. Pick a slot and The Card Stop drops a random, genuine item: a sealed, cased Pokémon booster pack or a cased Pokémon single. You don't choose the card; the surprise is the whole point. Card payment only — no cash needed.</p>
     </div>
     <div class="configs">
       <div class="config packs">
-        <span class="tag">MYSTERY PULL · CASED BOOSTER PACKS</span>
-        <h3>Cased mystery booster packs</h3>
-        <p>Pick a slot and the machine drops a random, factory-sealed booster pack in a protective top-loader case. You won't know which pack until it lands — that's the fun. Every pack is 100% authentic, sealed, and cased the moment it drops.</p>
-        <p class="price">Flat $27 per pull · every slot, one price</p>
+        <span class="tag">MYSTERY BOOSTER PACKS · CASED</span>
+        <h3>Mystery Pokémon booster packs — $27</h3>
+        <p>Pick a slot and the machine drops a random, factory-sealed Pokémon booster pack in a protective top-loader case. You won't know which pack until it lands — that's the fun. Every pack is 100% authentic and sealed the moment it drops.</p>
+        <p class="playhead">How to play</p>
+        <ol class="playsteps">
+          <li>Tap or insert your card.</li>
+          <li>Pick a slot.</li>
+          <li>Your cased mystery Pokémon booster pack drops to the tray.</li>
+        </ol>
+        <p class="price">Flat $27 every pull · authentic sealed pack every time · a chance at premium &amp; rare sets</p>
       </div>
       <div class="config singles">
-        <span class="tag">MYSTERY PULL · CASED SINGLES</span>
-        <h3>Cased mystery singles</h3>
-        <p>Pick a slot and the machine drops a random authentic single, cased and protected from the moment it lands. The exact card is a surprise every time — and a lucky slot can hide a <strong>chase card</strong> worth coming back for.</p>
-        <p class="price">Flat $1 per pull · every slot, one price</p>
+        <span class="tag">MYSTERY SINGLES · CASED</span>
+        <h3>Mystery Pokémon singles — $1</h3>
+        <p>Pick a slot and the machine drops a random authentic Pokémon single, cased and protected from the moment it lands. The exact card is a surprise every time — and a lucky slot can hide a <strong>graded chase card</strong> worth coming back for.</p>
+        <p class="playhead">How to play</p>
+        <ol class="playsteps">
+          <li>Tap or insert your card.</li>
+          <li>Pick a slot.</li>
+          <li>Your cased mystery Pokémon single drops to the tray.</li>
+        </ol>
+        <p class="price">Just $1 per pull · authentic single, cased · plus a graded chase card to win</p>
         <p style="margin-top:10px; font-size:13.5px;"><a href="claim.html" style="color:var(--teal); font-weight:700;">Pulled a chase? Claim it →</a></p>
       </div>
     </div>
     <p class="sec-head" style="margin:26px auto 0; color:var(--muted); font-size:13.5px; max-width:760px;">
-      You pick a slot — the machine drops a random item from it. No choosing a specific card, no cherry-picking. Every pull is genuine, authentic product at the single flat, posted price.
+      You pick a slot — the machine drops a random item from it. No choosing a specific card, no cherry-picking. Every pull is genuine, authentic Pokémon product at one flat, posted price.
     </p>
   </div>
 </section>
@@ -461,7 +518,7 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
     <div class="steps">
       <div class="step"><div class="n">1</div><h4>Pick a slot</h4><p>Tap any slot on the 43″ screen — one flat price, every slot a mystery.</p></div>
       <div class="step"><div class="n">2</div><h4>Tap or pay by card</h4><p>Fast, cashless checkout — no app, no account.</p></div>
-      <div class="step"><div class="n">3</div><h4>The machine vends</h4><p>Your random cased pack or single drops to the tray.</p></div>
+      <div class="step"><div class="n">3</div><h4>The machine vends</h4><p>Your random, cased Pokémon pack or single drops to the tray.</p></div>
       <div class="step"><div class="n">4</div><h4>Grab &amp; go</h4><p>Genuine, protected product in hand. Pull something real.</p></div>
     </div>
   </div>
@@ -496,7 +553,7 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
 
         <h3 class="blk" style="margin-top:28px;">Why Abbott Trading Card Group</h3>
         <ul class="checks">
-          <li><strong>100% authentic product</strong> — cased booster packs and cased singles, every time.</li>
+          <li><strong>100% authentic Pokémon</strong> — sealed booster packs and cased singles, every time.</li>
           <li><strong>Tamper-evident &amp; sealed</strong> — packs factory-sealed and cased; singles cased and protected.</li>
           <li><strong>Fair, fixed, posted prices</strong> — one flat price per product, no markup games.</li>
           <li><strong>Accepts tap &amp; card</strong> — modern, reliable, low-friction checkout.</li>
@@ -534,11 +591,11 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow">Authenticity &amp; trust</p>
-      <h2>Real product. One flat price. Every pull authentic.</h2>
+      <h2>Real Pokémon. One flat price. Every pull authentic.</h2>
     </div>
     <div class="seal"><b>100%</b><span>AUTHENTIC</span></div>
     <div class="grid">
-      <div class="card"><h3>Genuine &amp; protected</h3><p>Only authentic product from legitimate channels. Packs are factory-sealed and cased; singles come cased and protected from the moment they drop.</p></div>
+      <div class="card"><h3>Genuine &amp; protected</h3><p>Only authentic Pokémon product from legitimate channels. Booster packs are factory-sealed and cased; singles come cased and protected from the moment they drop.</p></div>
       <div class="card"><h3>Transparent pricing</h3><p>One flat price per product, posted right on the screen. You always know exactly what you'll pay before you tap — even though the exact card stays a surprise.</p></div>
       <div class="card"><h3>Independent</h3><p>Abbott Trading Card Group is an independent business and is <strong>not affiliated with, sponsored by, or endorsed by any game publisher</strong>. All product names and marks belong to their respective owners.</p></div>
     </div>
@@ -569,6 +626,7 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
       </div>
       <div class="disc">Operated by <b>Abbott Trading Card Group</b>, a DBA of Abbott LLC (Utah). Independent — not affiliated with, sponsored by, or endorsed by any game publisher. All product names and marks belong to their respective owners. © <span id="yr"></span> Abbott LLC. All rights reserved.</div>
     </div>
+    <div class="pkmn-disc">The Card Stop and Abbott Trading Card Group are not affiliated with, endorsed by, or sponsored by The Pokémon Company International, Nintendo, Game Freak, or Creatures Inc. Pokémon and all related trademarks are property of their respective owners. We sell authentic, sealed product sourced through legitimate channels.</div>
   </div>
 </footer>
 
