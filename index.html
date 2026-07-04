@@ -17,7 +17,7 @@
        [HTML] ELEMENTAL BAR ................. holographic accent strip
        [HTML] WHAT IT IS .................... brand intro + feature cards
        [HTML] THE MACHINE ................... The Card Stop specs
-       [HTML] WHAT'S INSIDE ................. two mystery products
+       [HTML] WHAT'S INSIDE ................. the mystery booster pack
        [HTML] HOW IT WORKS .................. consumer buy flow
        [HTML] HOST A CARD STOP .............. venue-owner pitch (revenue share)
        [HTML] AUTHENTICITY .................. trust / disclaimers
@@ -30,8 +30,8 @@
        • All brand colors are CSS variables in :root so you can retune once.
 ========================================================================== -->
 
-<title>CARD STOP — Authentic Pokémon Cards & Sealed Booster Packs | Abbott Trading Card Group</title>
-<meta name="description" content="CARD STOP by Abbott Trading Card Group — modern, fully managed vending machines that sell 100% authentic Pokémon cards and sealed, cased Pokémon booster packs at fair, posted prices across southern Utah. Host a Card Stop at your venue and earn a share of every sale.">
+<title>CARD STOP — Authentic Sealed Pokémon Booster Packs | Abbott Trading Card Group</title>
+<meta name="description" content="CARD STOP by Abbott Trading Card Group — modern, fully managed vending machines that sell 100% authentic, sealed, cased Pokémon booster packs at one flat, posted price across southern Utah. Host a Card Stop at your venue and earn a share of every sale.">
 <meta name="theme-color" content="#1B2A4A">
 
 <!-- Open Graph / social preview (update URL + image when live) -->
@@ -235,13 +235,11 @@ section{ padding:66px 0; }
 .framed::after{ content:""; position:absolute; inset:0; z-index:0;
   background:radial-gradient(closest-side, rgba(247,245,239,.86), rgba(247,245,239,.55)); }
 .framed .wrap{ position:relative; z-index:1; }
-.configs{ display:grid; grid-template-columns:1fr 1fr; gap:22px; }
-@media(max-width:760px){ .configs{ grid-template-columns:1fr; } }
+.configs{ display:grid; grid-template-columns:1fr; gap:22px; max-width:620px; margin:0 auto; }
 .config{ background:#fff; border:1.5px solid var(--line); border-radius:18px; padding:26px; }
 .config .tag{ display:inline-block; font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:11px; letter-spacing:.6px;
   padding:5px 11px; border-radius:7px; margin-bottom:13px; color:#06201f; }
 .config.packs .tag{ background:var(--electric-yellow); }
-.config.singles .tag{ background:var(--teal); }
 .config h3{ font-size:22px; color:var(--indigo); margin-bottom:9px; }
 .config p{ color:var(--muted); font-size:15px; }
 .config .price{ margin-top:14px; font-family:'Montserrat',Arial,sans-serif; font-weight:800; color:var(--ember); font-size:14px; }
@@ -407,7 +405,7 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
 
 <!-- ======================= [HTML] ELEMENTAL ACCENT BAR ======================= -->
 <div class="elembar" aria-hidden="true"></div>
-<div class="elemnote"><b>Electric · Water · Grass · Fire</b> — four elements, one mystery. Every pull is an authentic, sealed Pokémon card.</div>
+<div class="elemnote"><b>Electric · Water · Grass · Fire</b> — four elements, one mystery. Every pull is an authentic, sealed Pokémon booster pack.</div>
 
 <!-- ======================= [HTML] WHAT IT IS ======================= -->
 <section id="about">
@@ -417,11 +415,11 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
       <h2>A Pokémon card shop, in a machine</h2>
       <p>Abbott Trading Card Group owns, stocks, and services every
         <span class="wm"><span class="c-card">CARD</span> <span class="c-stop">STOP</span></span> —
-        bringing genuine, cased Pokémon cards and sealed booster packs within arm's reach at one flat, honest price per pull. Real product, every time.</p>
+        bringing genuine, sealed Pokémon booster packs within arm's reach at one flat, honest price per pull. Real product, every time.</p>
     </div>
     <div class="grid">
-      <div class="card"><div class="ic">✓</div><h3>100% authentic Pokémon</h3><p>Only genuine Pokémon product from legitimate channels. Sealed, cased booster packs and cased singles — what you get is always real.</p></div>
-      <div class="card"><div class="ic">$</div><h3>One flat price</h3><p>Every product is a single flat price, posted right on the 43″ screen. No markup games — just honest value on genuine product.</p></div>
+      <div class="card"><div class="ic">✓</div><h3>100% authentic Pokémon</h3><p>Only genuine Pokémon product from legitimate channels. Every booster pack is factory-sealed and cased — what you get is always real.</p></div>
+      <div class="card"><div class="ic">$</div><h3>One flat price</h3><p>One flat $25 per pack, posted right on the 43″ screen. No markup games — just honest value on genuine product.</p></div>
       <div class="card"><div class="ic">⌁</div><h3>Tap &amp; go</h3><p>Fast, cashless checkout by tap or card on a bright touchscreen. Built for busy, family-friendly venues.</p></div>
       <div class="card"><div class="ic">★</div><h3>Local &amp; veteran-operated</h3><p>A real local partner based in Hurricane / St. George, Utah — quick to respond and accountable.</p></div>
     </div>
@@ -473,43 +471,31 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
   </div>
 </section>
 
-<!-- ======================= [HTML] WHAT'S INSIDE (two configurations) ======================= -->
+<!-- ======================= [HTML] WHAT'S INSIDE (the mystery booster pack) ======================= -->
 <!-- Uses card-stop-frame.png as an ambient elemental "frame" behind the content. -->
 <section class="framed" id="inside">
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow">What's inside</p>
-      <h2>Two ways to play</h2>
-      <p>One machine, two mystery pulls — all authentic Pokémon. Pick a slot and The Card Stop drops a random, genuine item: a sealed, cased Pokémon booster pack or a cased Pokémon single. You don't choose the card; the surprise is the whole point. Card payment only — no cash needed.</p>
+      <h2>One pull. One flat price. Every pack a mystery.</h2>
+      <p>The Card Stop sells one thing: a mystery Pokémon booster pack. Pick a slot and the machine drops a random, factory-sealed, authentic Pokémon booster pack in a protective case. You don't pick the set — every pull is a surprise. Card payment only — no cash needed.</p>
     </div>
     <div class="configs">
       <div class="config packs">
-        <span class="tag">MYSTERY BOOSTER PACKS · CASED</span>
-        <h3>Mystery Pokémon booster packs — $27</h3>
-        <p>Pick a slot and the machine drops a random, factory-sealed Pokémon booster pack in a protective top-loader case. You won't know which pack until it lands — that's the fun. Every pack is 100% authentic and sealed the moment it drops.</p>
+        <span class="tag">MYSTERY BOOSTER PACK · CASED</span>
+        <h3>Mystery Pokémon booster pack — $25</h3>
+        <p>Pick a slot and the machine drops a random, factory-sealed Pokémon booster pack in a protective top-loader case. You won't know which pack — or which set — until it lands. That's the fun: every pack is 100% authentic and sealed the moment it drops, <strong>plus a chance to win a graded chase card</strong>.</p>
         <p class="playhead">How to play</p>
         <ol class="playsteps">
-          <li>Tap or insert your card.</li>
-          <li>Pick a slot.</li>
+          <li>Tap or insert your card — $25 flat.</li>
+          <li>Pick any slot.</li>
           <li>Your cased mystery Pokémon booster pack drops to the tray.</li>
         </ol>
-        <p class="price">Flat $27 every pull · authentic sealed pack every time · a chance at premium &amp; rare sets</p>
-      </div>
-      <div class="config singles">
-        <span class="tag">MYSTERY SINGLES · CASED</span>
-        <h3>Mystery Pokémon singles — $1</h3>
-        <p>Pick a slot and the machine drops a random authentic Pokémon single, cased and protected from the moment it lands. The exact card is a surprise every time — and a lucky slot can hide a <strong>graded chase card</strong> worth coming back for.</p>
-        <p class="playhead">How to play</p>
-        <ol class="playsteps">
-          <li>Tap or insert your card.</li>
-          <li>Pick a slot.</li>
-          <li>Your cased mystery Pokémon single drops to the tray.</li>
-        </ol>
-        <p class="price">Just $1 per pull · authentic single, cased · plus a graded chase card to win</p>
+        <p class="price">Flat $25 every pull · random authentic sealed pack · plus a chance to win a graded chase card</p>
       </div>
     </div>
     <p class="sec-head" style="margin:26px auto 0; color:var(--muted); font-size:13.5px; max-width:760px;">
-      You pick a slot — the machine drops a random item from it. No choosing a specific card, no cherry-picking. Every pull is genuine, authentic Pokémon product at one flat, posted price.
+      You pick a slot — the machine drops a random, sealed pack from it. You don't choose the set, and there's no cherry-picking. Every pull is genuine, authentic Pokémon product at one flat, posted price.
     </p>
   </div>
 </section>
@@ -522,9 +508,9 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
       <h2>Pull something real in four taps</h2>
     </div>
     <div class="steps">
-      <div class="step"><div class="n">1</div><h4>Pick a slot</h4><p>Tap any slot on the 43″ screen — one flat price, every slot a mystery.</p></div>
+      <div class="step"><div class="n">1</div><h4>Pick a slot</h4><p>Tap any slot on the 43″ screen — one flat $25 price, every slot a mystery pack.</p></div>
       <div class="step"><div class="n">2</div><h4>Tap or pay by card</h4><p>Fast, cashless checkout — no app, no account.</p></div>
-      <div class="step"><div class="n">3</div><h4>The machine vends</h4><p>Your random, cased Pokémon pack or single drops to the tray.</p></div>
+      <div class="step"><div class="n">3</div><h4>The machine vends</h4><p>Your random, cased Pokémon booster pack drops to the tray.</p></div>
       <div class="step"><div class="n">4</div><h4>Grab &amp; go</h4><p>Genuine, protected product in hand. Pull something real.</p></div>
     </div>
   </div>
@@ -559,9 +545,9 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
 
         <h3 class="blk" style="margin-top:28px;">Why Abbott Trading Card Group</h3>
         <ul class="checks">
-          <li><strong>100% authentic Pokémon</strong> — sealed booster packs and cased singles, every time.</li>
-          <li><strong>Tamper-evident &amp; sealed</strong> — packs factory-sealed and cased; singles cased and protected.</li>
-          <li><strong>Fair, fixed, posted prices</strong> — one flat price per product, no markup games.</li>
+          <li><strong>100% authentic Pokémon</strong> — factory-sealed, cased booster packs, every time.</li>
+          <li><strong>Tamper-evident &amp; sealed</strong> — every booster pack is factory-sealed and cased.</li>
+          <li><strong>Fair, fixed, posted prices</strong> — one flat price per pack, no markup games.</li>
           <li><strong>Accepts tap &amp; card</strong> — modern, reliable, low-friction checkout.</li>
           <li><strong>Locally owned · veteran operated</strong> — a real, accountable local partner.</li>
         </ul>
@@ -601,8 +587,8 @@ footer{ background:var(--indigo); color:var(--bone); padding:56px 0 30px; }
     </div>
     <div class="seal"><b>100%</b><span>AUTHENTIC</span></div>
     <div class="grid">
-      <div class="card"><h3>Genuine &amp; protected</h3><p>Only authentic Pokémon product from legitimate channels. Booster packs are factory-sealed and cased; singles come cased and protected from the moment they drop.</p></div>
-      <div class="card"><h3>Transparent pricing</h3><p>One flat price per product, posted right on the screen. You always know exactly what you'll pay before you tap — even though the exact card stays a surprise.</p></div>
+      <div class="card"><h3>Genuine &amp; protected</h3><p>Only authentic Pokémon product from legitimate channels. Every booster pack is factory-sealed and cased from the moment it drops.</p></div>
+      <div class="card"><h3>Transparent pricing</h3><p>One flat price per pack, posted right on the screen. You always know exactly what you'll pay before you tap — even though the exact pack stays a surprise.</p></div>
       <div class="card"><h3>Independent</h3><p>Abbott Trading Card Group is an independent business and is <strong>not affiliated with, sponsored by, or endorsed by any game publisher</strong>. All product names and marks belong to their respective owners.</p></div>
     </div>
   </div>
